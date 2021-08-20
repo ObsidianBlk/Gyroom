@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Graphics/monochrome_transparent_packed.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Player/Player.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.0
+height = 6.0
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Char" type="Node2D" parent="."]
+
+[node name="Head" type="Sprite" parent="Char"]
+position = Vector2( 0, -11 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 453, 17, 6, 6 )
+
+[node name="Body" type="Sprite" parent="Char"]
+position = Vector2( 0, -3.5 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 437, 24, 6, 7 )
+
+[node name="LeftArm" type="Sprite" parent="Char"]
+position = Vector2( -4, -5 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 434, 23, 3, 6 )
+
+[node name="RightArm" type="Sprite" parent="Char"]
+position = Vector2( 4, -5 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 443, 23, 3, 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -7 )
+shape = SubResource( 1 )
