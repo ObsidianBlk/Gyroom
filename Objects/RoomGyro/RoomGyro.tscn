@@ -1,0 +1,127 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Graphics/1bitplat_mono_trans_packed.png" type="Texture" id=1]
+[ext_resource path="res://Objects/RoomGyro/RoomGyro.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15, 2 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "fast"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Rect2( 112, 305, 32, 15 ), Rect2( 112, 289, 32, 15 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 112, 289, 32, 15 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "medium"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Rect2( 112, 305, 32, 15 ), Rect2( 112, 289, 32, 15 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "slow"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Rect2( 112, 305, 32, 15 ), Rect2( 112, 289, 32, 15 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "vfast"
+length = 0.15
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Rect2( 112, 305, 32, 15 ), Rect2( 112, 289, 32, 15 ) ]
+}
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 4.0
+
+[node name="RoomGyro" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 112, 305, 32, 15 )
+
+[node name="Platform" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2( 0, 3.5 )
+shape = SubResource( 1 )
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/fast = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/medium = SubResource( 4 )
+anims/slow = SubResource( 5 )
+anims/vfast = SubResource( 6 )
+
+[node name="TriggerArea" type="Area2D" parent="."]
+collision_layer = 32768
+collision_mask = 524288
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+position = Vector2( 0, -2.5 )
+rotation = 1.5708
+shape = SubResource( 7 )
+
+[connection signal="body_entered" from="TriggerArea" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="TriggerArea" to="." method="_on_body_exited"]

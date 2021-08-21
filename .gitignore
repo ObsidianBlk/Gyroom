@@ -7,6 +7,9 @@ export_presets.cfg
 # Release folder
 Releases/*
 
+# Ignore Work directory
+Work/*
+
 # Imported translations (automatically generated from CSV files)
 *.translation
 

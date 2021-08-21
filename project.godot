@@ -8,11 +8,40 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "GyroMap",
+"language": "GDScript",
+"path": "res://Scripts/GyroMap.gd"
+}, {
+"base": "Node2D",
+"class": "Ladder",
+"language": "GDScript",
+"path": "res://Objects/Ladder/Ladder.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Objects/Player/Player.gd"
+} ]
+_global_script_class_icons={
+"GyroMap": "",
+"Ladder": "",
+"Player": ""
+}
+
 [application]
 
 config/name="Gyroom"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=480
+window/size/height=270
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [input]
 
@@ -28,11 +57,31 @@ Right={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
  ]
 }
+Up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+ ]
+}
 Jump={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Surface A"
+2d_physics/layer_2="Surface B"
+2d_physics/layer_3="Surface C"
+2d_physics/layer_16="Trigger"
+2d_physics/layer_20="Player"
 
 [physics]
 
