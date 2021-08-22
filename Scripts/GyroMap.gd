@@ -8,11 +8,14 @@ class_name GyroMap
 var _degrees_per_second : float = 0.0
 var _tween : Tween = null
 
+var reset_rot : float = 0.0
+
 # --------------------------------------------------
 # Override Methods
 # --------------------------------------------------
 
 func _ready() -> void:
+	reset_rot = rotation
 	_tween = Tween.new()
 	add_child(_tween)
 	_tween.connect("tween_all_completed", self, "_on_tween_complete")
@@ -30,6 +33,9 @@ func _RotTween() -> void:
 # --------------------------------------------------
 # Handler Methods
 # --------------------------------------------------
+
+func _on_reset() -> void:
+	rotation = reset_rot
 
 func _on_tween_complete() -> void:
 	if _degrees_per_second != 0.0:

@@ -7,6 +7,7 @@ class_name Level
 # --------------------------------------------------
 signal request_level(level_res)
 signal request_exit
+signal reset
 
 # --------------------------------------------------
 # Variables
@@ -103,6 +104,7 @@ func detach_camera_to_container(container : Node2D) -> void:
 
 func _on_request_respawn() -> void:
 	_PositionPlayer()
+	emit_signal("reset")
 
 
 func _on_call_exit(next_level_res) -> void:

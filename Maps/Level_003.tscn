@@ -89,6 +89,7 @@ z_index = 4
 
 [node name="ExitDoor" parent="Items" instance=ExtResource( 8 )]
 position = Vector2( 880, 1 )
+next_level_res = "res://Maps/Level_004.tscn"
 door_color = Color( 0.141176, 0.164706, 0.168627, 1 )
 
 [node name="Decorations" type="Node2D" parent="."]
@@ -174,3 +175,4 @@ __meta__ = {
 
 [connection signal="gyro" from="Items/RoomGyro" to="GyroRoom001" method="_on_gyro"]
 [connection signal="gyro" from="Items/RoomGyro2" to="GyroRoom001" method="_on_gyro"]
+[connection signal="call_exit" from="Items/ExitDoor" to="." method="_on_call_exit"]
