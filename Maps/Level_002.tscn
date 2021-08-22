@@ -1,0 +1,139 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/Tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Scripts/Level.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/GyroMap.gd" type="Script" id=3]
+[ext_resource path="res://Objects/GlowLight/GlowLight.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/RoomGyro/RoomGyro.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Key/Key.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Door/Door.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/ExitDoor/ExitDoor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Shaders/Fog.shader" type="Shader" id=9]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 9 )
+shader_param/seed = 0.0
+shader_param/strength = 0.25
+shader_param/color = Color( 0.32549, 0.329412, 0.282353, 1 )
+shader_param/octaves = 3
+shader_param/speed = 0.5
+shader_param/scale_a = 5.0
+shader_param/scale_b = 5.0
+shader_param/offset = Vector2( 0, 0 )
+
+[node name="Level_002" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="StaticTiles" type="TileMap" parent="."]
+modulate = Color( 0.588235, 0.580392, 0.54902, 1 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -65514, 4, 0, -65513, 4, 1, -65512, 4, 1, -65511, 4, 2, 22, 4, 65536, 23, 4, 65537, 24, 4, 65537, 25, 4, 65538, 65558, 4, 65536, 65559, 4, 65537, 65560, 4, 65537, 65561, 4, 65538, 131094, 4, 65536, 131095, 4, 65537, 131096, 4, 65537, 131097, 4, 65538, 196630, 4, 65536, 196631, 4, 65537, 196632, 4, 65537, 196633, 4, 65538, 262145, 4, 196608, 262146, 4, 196609, 262147, 4, 196609, 262148, 4, 196609, 262149, 4, 196610, 262166, 4, 65536, 262167, 4, 65537, 262168, 4, 65537, 262169, 4, 65538, 327681, 3, 3, 327702, 4, 65536, 327703, 4, 65537, 327704, 4, 65537, 327705, 4, 65538, 393217, 3, 65539, 393238, 4, 65536, 393239, 4, 65537, 393240, 4, 65537, 393241, 4, 65538, 458753, 3, 131075, 458774, 4, 65536, 458775, 4, 65537, 458776, 4, 65537, 458777, 4, 65538, 524289, 4, 196608, 524290, 4, 196609, 524291, 4, 196609, 524292, 4, 196609, 524293, 4, 196610, 524296, 4, 0, 524297, 4, 1, 524298, 4, 2, 524305, 4, 0, 524306, 4, 1, 524307, 4, 2, 524310, 4, 131072, 524311, 4, 131073, 524312, 4, 131073, 524313, 4, 131074, 589828, 0, 3, 589831, 3, 196611, 589832, 4, 131072, 589833, 4, 131073, 589834, 4, 131074, 589841, 4, 65536, 589842, 4, 65537, 589843, 4, 65538, 589848, 0, 0, 589849, 0, 2, 655364, 0, 131075, 655370, 0, 196608, 655371, 0, 196610, 655372, 4, 196608, 655373, 4, 196610, 655375, 4, 196608, 655376, 4, 196609, 655377, 4, 196611, 655378, 4, 131073, 655379, 4, 131074, 655380, 3, 196611, 655384, 0, 65536, 655385, 0, 65538, 720899, 1, 0, 720900, 1, 1, 720901, 1, 2, 720907, 3, 3, 720909, 3, 3, 720911, 3, 3, 720914, 3, 196611, 720918, 4, 196608, 720919, 4, 196610, 720920, 0, 65536, 720921, 0, 65538, 786435, 1, 65536, 786436, 1, 65537, 786437, 1, 65538, 786438, 0, 196608, 786439, 0, 196609, 786440, 0, 196610, 786443, 3, 131075, 786445, 3, 65539, 786447, 3, 131075, 786454, 3, 196608, 786455, 3, 196610, 786456, 0, 131072, 786457, 0, 131074, 851971, 1, 65536, 851972, 1, 65537, 851973, 1, 65538, 851974, 2, 196608, 851975, 2, 196609, 851976, 2, 196610, 851977, 1, 196611, 851981, 3, 131075, 851983, 4, 0, 851984, 4, 1, 851985, 4, 1, 851986, 4, 1, 851987, 4, 1, 851988, 4, 1, 851989, 4, 1, 851990, 4, 1, 851991, 4, 1, 851992, 4, 1, 851993, 4, 1, 851994, 4, 2, 917507, 1, 131072, 917508, 1, 131073, 917509, 1, 131074, 917510, 3, 196608, 917511, 3, 196609, 917512, 3, 196609, 917513, 3, 196610, 917514, 4, 196608, 917515, 4, 196609, 917516, 4, 196609, 917517, 4, 196610, 917519, 4, 131072, 917520, 4, 131073, 917521, 4, 131073, 917522, 4, 131073, 917523, 4, 131073, 917524, 4, 131073, 917525, 4, 131073, 917526, 4, 131073, 917527, 4, 131073, 917528, 4, 131073, 917529, 4, 131073, 917530, 4, 131074 )
+
+[node name="Bridge" type="Node2D" parent="."]
+position = Vector2( 224, 128 )
+script = ExtResource( 3 )
+
+[node name="TileMap" type="TileMap" parent="Bridge"]
+modulate = Color( 0.678431, 0.572549, 0.454902, 1 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -131075, 3, 3, -131074, 4, 196608, -131073, 4, 196609, -196608, 4, 196609, -196607, 4, 196610, -196606, 3, 3, -65539, 3, 131075, -131070, 3, 131075, -1, 4, 196608, -65536, 4, 196610 )
+
+[node name="Decorations" type="Node2D" parent="Bridge"]
+
+[node name="GlowLight" parent="Bridge/Decorations" instance=ExtResource( 4 )]
+position = Vector2( -39.4825, 11.3602 )
+hide_base = true
+light_color = Color( 0.878431, 0.933333, 0.239216, 1 )
+
+[node name="GlowLight2" parent="Bridge/Decorations" instance=ExtResource( 4 )]
+position = Vector2( 39.7127, 11.3599 )
+hide_base = true
+light_color = Color( 0.878431, 0.933333, 0.239216, 1 )
+
+[node name="Key" parent="Bridge" instance=ExtResource( 6 )]
+position = Vector2( 0, -32 )
+rotation = 3.14159
+key_name = "blue_key"
+key_color = Color( 0.294118, 0.305882, 1, 1 )
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="GlowLight" parent="Decorations" instance=ExtResource( 4 )]
+position = Vector2( 88.9431, 128.332 )
+base_color = Color( 0.439216, 0.431373, 0.4, 1 )
+light_color = Color( 0.878431, 0.933333, 0.239216, 1 )
+
+[node name="RoomGyro" parent="Decorations" instance=ExtResource( 5 )]
+modulate = Color( 0.419608, 0.411765, 0.388235, 1 )
+position = Vector2( 55.0748, 122.001 )
+z_index = 4
+
+[node name="GlowLight2" parent="Decorations" instance=ExtResource( 4 )]
+position = Vector2( 368.267, 176 )
+base_color = Color( 0.439216, 0.431373, 0.4, 1 )
+light_color = Color( 0.333333, 0.568627, 0.462745, 1 )
+light_base_energy = 2.0
+light_base_scale = 2.0
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="Blue_Door" parent="Doors" instance=ExtResource( 7 )]
+position = Vector2( 184, 224 )
+frame_color = Color( 0.294118, 0.305882, 1, 1 )
+door_color = Color( 0.47451, 0.498039, 0.517647, 1 )
+open_direction = 1
+key_item_name = "blue_key"
+
+[node name="Key" parent="Doors" instance=ExtResource( 6 )]
+position = Vector2( 199.79, 223.649 )
+key_name = "green_key"
+key_color = Color( 0.286275, 0.698039, 0.203922, 1 )
+
+[node name="Green_Door" parent="Doors" instance=ExtResource( 7 )]
+position = Vector2( 295, 208 )
+frame_color = Color( 0.286275, 0.698039, 0.203922, 1 )
+door_color = Color( 0.47451, 0.498039, 0.517647, 1 )
+key_item_name = "green_key"
+
+[node name="ExitDoor" parent="Doors" instance=ExtResource( 8 )]
+position = Vector2( 270.311, 208.011 )
+next_level_res = "res://Maps/Level_003.tscn"
+door_color = Color( 0.4, 0.392157, 0.364706, 1 )
+
+[node name="Player_Container" type="Node2D" parent="."]
+
+[node name="Camera_Container" type="Node2D" parent="."]
+
+[node name="Player_Start" type="Position2D" parent="."]
+position = Vector2( 149.907, 188.444 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0, 0, 0, 1 )
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fog" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Fog"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="gyro" from="Decorations/RoomGyro" to="Bridge" method="_on_gyro"]
+[connection signal="call_exit" from="Doors/ExitDoor" to="." method="_on_call_exit"]

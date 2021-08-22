@@ -13,16 +13,29 @@ var _tween : Tween = null
 # --------------------------------------------------
 
 func _ready() -> void:
-	_tween = Tween.instance()
+	_tween = Tween.new()
 	add_child(_tween)
 	_tween.connect("tween_all_completed", self, "_on_tween_complete")
+
+# --------------------------------------------------
+# Private Methods
+# --------------------------------------------------
+
+func _RotTween() -> void:
+	_tween.remove_all()
+	var todeg = rotation_degrees + _degrees_per_second
+	_tween.interpolate_property(self, "rotation_degrees", rotation_degrees, todeg, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.start()
 
 # --------------------------------------------------
 # Handler Methods
 # --------------------------------------------------
 
 func _on_tween_complete() -> void:
-	if _degrees_per_second 
+	if _degrees_per_second != 0.0:
+		_RotTween()
 
 func _on_gyro(dps : float) -> void:
-	rotation_degrees += dps
+	_degrees_per_second = dps
+	if dps != 0:
+		_RotTween()

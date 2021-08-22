@@ -1,0 +1,176 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Shaders/Fog.shader" type="Shader" id=2]
+[ext_resource path="res://Objects/GlowLight/GlowLight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Ladder/Ladder.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/Level.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/GyroMap.gd" type="Script" id=6]
+[ext_resource path="res://Objects/RoomGyro/RoomGyro.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/ExitDoor/ExitDoor.tscn" type="PackedScene" id=8]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/seed = 0.0
+shader_param/strength = 0.25
+shader_param/color = Color( 0.231373, 0.498039, 0.439216, 1 )
+shader_param/octaves = 3
+shader_param/speed = 0.5
+shader_param/scale_a = 5.0
+shader_param/scale_b = 5.0
+shader_param/offset = Vector2( 0, 0 )
+
+[node name="Level_003" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="StaticTiles" type="TileMap" parent="."]
+modulate = Color( 0.239216, 0.298039, 0.309804, 1 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -393188, 1, 0, -393187, 1, 2, -327652, 1, 65536, -327651, 1, 65538, -262116, 1, 65536, -262115, 1, 65538, -262088, 3, 3, -196580, 1, 131072, -196579, 1, 131074, -196552, 3, 65539, -131037, 4, 196608, -131036, 4, 196609, -131035, 4, 196609, -131034, 4, 196609, -131033, 4, 196609, -131032, 4, 196609, -131031, 4, 196609, -131030, 4, 196609, -131029, 4, 196610, -131016, 3, 65539, -65495, 3, 3, -65480, 3, 131075, 9, 3, 3, 41, 3, 65539, 53, 3, 3, 54, 4, 196608, 55, 4, 196609, 56, 4, 196610, 65545, 3, 65539, 65564, 1, 0, 65565, 1, 2, 65577, 3, 131075, 65578, 4, 196608, 65579, 4, 196610, 65587, 4, 196608, 65588, 4, 196610, 65589, 3, 131075, 131081, 3, 65539, 131099, 0, 196611, 131100, 1, 65536, 131101, 1, 65538, 196617, 3, 65539, 196636, 1, 65536, 196637, 1, 65538, 196644, 4, 196608, 196645, 4, 196609, 196646, 4, 196610, 196647, 3, 3, 262153, 3, 131075, 262172, 1, 65536, 262173, 1, 65538, 262183, 3, 65539, 327689, 4, 196608, 327690, 4, 196609, 327691, 4, 196609, 327692, 4, 196609, 327693, 4, 196609, 327694, 4, 196610, 327700, 1, 0, 327701, 1, 2, 327703, 0, 0, 327704, 0, 1, 327705, 0, 1, 327706, 0, 1, 327707, 0, 2, 327708, 1, 65536, 327709, 1, 65538, 327719, 3, 65539, 393236, 1, 65536, 393237, 1, 65538, 393239, 0, 131072, 393240, 0, 131073, 393241, 0, 131073, 393242, 0, 131073, 393243, 0, 131074, 393244, 1, 65536, 393245, 1, 65538, 393255, 3, 65539, 458772, 1, 65536, 458773, 1, 65538, 458776, 1, 196608, 458777, 1, 196609, 458778, 1, 196610, 458780, 1, 65536, 458781, 1, 65538, 458785, 4, 196608, 458786, 4, 196610, 458788, 4, 196608, 458789, 4, 196609, 458790, 4, 196610, 458791, 3, 131075, 524308, 1, 65536, 524309, 1, 65538, 524312, 0, 196608, 524313, 0, 196609, 524314, 0, 196609, 524315, 0, 196610, 524316, 1, 65536, 524317, 1, 65538, 589844, 1, 65536, 589845, 1, 65538, 589849, 1, 196608, 589850, 1, 196610, 589852, 1, 65536, 589853, 1, 65538, 589854, 4, 196608, 589855, 4, 196610, 655380, 1, 65536, 655381, 1, 65538, 655386, 0, 0, 655387, 0, 2, 655388, 1, 65536, 655389, 1, 65538, 720916, 1, 65536, 720917, 1, 65538, 720922, 0, 131072, 720923, 0, 131074, 720924, 1, 65536, 720925, 1, 65538, 786452, 1, 65536, 786453, 1, 65538, 786460, 1, 65536, 786461, 1, 65538, 851988, 1, 65536, 851989, 1, 65538, 851996, 1, 65536, 851997, 1, 65538, 917524, 1, 131072, 917525, 1, 131074, 917532, 1, 131072, 917533, 1, 131074, 983060, 0, 0, 983061, 0, 1, 983062, 0, 1, 983063, 0, 1, 983064, 0, 1, 983065, 0, 1, 983066, 0, 1, 983067, 0, 1, 983068, 0, 1, 983069, 0, 2, 1048596, 0, 65536, 1048597, 0, 196611, 1048598, 0, 196611, 1048599, 0, 196611, 1048600, 0, 196611, 1048601, 0, 196611, 1048602, 0, 196611, 1048603, 0, 196611, 1048604, 0, 196611, 1048605, 0, 65538, 1114132, 0, 65536, 1114133, 0, 196611, 1114134, 0, 196611, 1114135, 0, 196611, 1114136, 0, 196611, 1114137, 0, 196611, 1114138, 0, 196611, 1114139, 0, 196611, 1114140, 0, 196611, 1114141, 0, 65538, 1179668, 0, 65536, 1179669, 0, 196611, 1179670, 0, 196611, 1179671, 0, 196611, 1179672, 0, 196611, 1179673, 0, 196611, 1179674, 0, 196611, 1179675, 0, 196611, 1179676, 0, 196611, 1179677, 0, 65538, 1245204, 0, 131072, 1245205, 0, 131073, 1245206, 0, 131073, 1245207, 0, 131073, 1245208, 0, 131073, 1245209, 0, 131073, 1245210, 0, 131073, 1245211, 0, 131073, 1245212, 0, 131073, 1245213, 0, 131074 )
+
+[node name="GyroRoom001" type="Node2D" parent="."]
+position = Vector2( 464, 32 )
+rotation = 1.5708
+script = ExtResource( 6 )
+
+[node name="TileMap" type="TileMap" parent="GyroRoom001"]
+modulate = Color( 0.266667, 0.239216, 0.309804, 1 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -3, 3, 196611, 65532, 4, 196608, 65533, 4, 196610, 131067, 3, 196608, 131068, 3, 196609, 131069, 3, 196610, 196602, 4, 196608, 196603, 4, 196609, 196604, 4, 196610 )
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Ladder_H_001" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 327, 80 )
+main_color = Color( 0.380392, 0.541176, 0.560784, 1 )
+support_color = Color( 0.141176, 0.192157, 0.203922, 1 )
+mode = 1
+grow = 0
+segments = 6
+segment_extend_time = 0.0
+extended = true
+
+[node name="Ladder_H_002" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 696, 16 )
+main_color = Color( 0.380392, 0.541176, 0.560784, 1 )
+support_color = Color( 0.141176, 0.192157, 0.203922, 1 )
+mode = 1
+segments = 8
+segment_extend_time = 0.0
+extended = true
+
+[node name="Ladder_V_001" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 359.596, 240.005 )
+main_color = Color( 0.380392, 0.541176, 0.560784, 1 )
+segments = 9
+segment_extend_time = 0.0
+extended = true
+
+[node name="Ladder_V_002" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 487.886, 144.234 )
+main_color = Color( 0.380392, 0.541176, 0.560784, 1 )
+segments = 7
+segment_extend_time = 0.0
+extended = true
+
+[node name="RoomGyro" parent="Items" instance=ExtResource( 7 )]
+modulate = Color( 0.141176, 0.192157, 0.203922, 1 )
+position = Vector2( 188, 74 )
+z_index = 4
+
+[node name="RoomGyro2" parent="Items" instance=ExtResource( 7 )]
+modulate = Color( 0.141176, 0.192157, 0.203922, 1 )
+position = Vector2( 604, 106 )
+z_index = 4
+
+[node name="ExitDoor" parent="Items" instance=ExtResource( 8 )]
+position = Vector2( 880, 1 )
+door_color = Color( 0.141176, 0.164706, 0.168627, 1 )
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="GlowLight" parent="Decorations" instance=ExtResource( 3 )]
+position = Vector2( 408, 240 )
+base_color = Color( 0.141176, 0.192157, 0.203922, 1 )
+light_color = Color( 0.615686, 0.945098, 1, 1 )
+light_base_scale = 3.0
+
+[node name="GlowLight2" parent="Decorations" instance=ExtResource( 3 )]
+position = Vector2( 214, 80 )
+base_color = Color( 0.141176, 0.192157, 0.203922, 1 )
+light_color = Color( 0.615686, 0.945098, 1, 1 )
+light_base_energy = 0.8
+
+[node name="GlowLight3" parent="Decorations" instance=ExtResource( 3 )]
+position = Vector2( 344, 80 )
+base_color = Color( 0.141176, 0.192157, 0.203922, 1 )
+light_color = Color( 0.615686, 0.945098, 1, 1 )
+light_base_energy = 0.8
+light_base_scale = 4.0
+
+[node name="GlowLight4" parent="Decorations" instance=ExtResource( 3 )]
+position = Vector2( 471.448, -5.65178 )
+hide_base = true
+base_color = Color( 0.141176, 0.192157, 0.203922, 1 )
+light_color = Color( 0.615686, 0.945098, 1, 1 )
+light_base_energy = 0.8
+light_base_scale = 1.5
+
+[node name="GlowLight5" parent="Decorations" instance=ExtResource( 3 )]
+position = Vector2( 535, 112 )
+base_color = Color( 0.141176, 0.192157, 0.203922, 1 )
+light_color = Color( 0.615686, 0.945098, 1, 1 )
+light_base_energy = 0.8
+light_base_scale = 3.0
+
+[node name="GlowLight6" parent="Decorations" instance=ExtResource( 3 )]
+position = Vector2( 682, 16 )
+base_color = Color( 0.141176, 0.192157, 0.203922, 1 )
+light_color = Color( 0.615686, 0.945098, 1, 1 )
+light_base_energy = 0.8
+light_base_scale = 2.0
+
+[node name="GlowLight7" parent="Decorations" instance=ExtResource( 3 )]
+position = Vector2( 838, 16 )
+base_color = Color( 0.141176, 0.192157, 0.203922, 1 )
+light_color = Color( 0.615686, 0.945098, 1, 1 )
+light_base_energy = 0.8
+light_base_scale = 2.0
+
+[node name="Player_Container" type="Node2D" parent="."]
+
+[node name="Camera_Container" type="Node2D" parent="."]
+
+[node name="Player_Start" type="Position2D" parent="."]
+position = Vector2( 435.4, 239.21 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0, 0, 0, 1 )
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fog" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Fog"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="gyro" from="Items/RoomGyro" to="GyroRoom001" method="_on_gyro"]
+[connection signal="gyro" from="Items/RoomGyro2" to="GyroRoom001" method="_on_gyro"]

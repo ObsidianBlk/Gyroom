@@ -14,6 +14,8 @@ const TOP_LADDER_REGION = Rect2(16, 48, 16, 16)
 # --------------------------------------------------
 # Export Variables
 # --------------------------------------------------
+export var main_color : Color = Color(1,1,1)				setget set_main_color
+export var support_color : Color = Color(1,1,1)				setget set_support_color
 export (MODE) var mode = MODE.VERTICLE						setget set_mode
 export (GROW) var grow = GROW.RIGHT							setget set_grow
 export (int, 1, 32) var segments = 4						setget set_segments
@@ -30,15 +32,29 @@ var _spr_list = []
 # Onready Variables
 # --------------------------------------------------
 onready var _tween_node = get_node("Tween")
-onready var _refsprite_node = get_node("RefSprite")
-onready var _hanchor_l_node = get_node("HAnchor_L")
-onready var _hanchor_r_node = get_node("HAnchor_R")
-onready var _vanchor_node = get_node("VAnchor")
+onready var _refsprite_node = get_node("Core/RefSprite")
+onready var _hanchor_l_node = get_node("Core/HAnchor_L")
+onready var _hanchor_r_node = get_node("Core/HAnchor_R")
+onready var _vanchor_node = get_node("Core/VAnchor")
 onready var _colshape_node = get_node("Area/ColShape")
 
 # --------------------------------------------------
 # Setters / Getters
 # --------------------------------------------------
+
+func set_main_color(c : Color) -> void:
+	main_color = c
+	if _vanchor_node:
+		_vanchor_node.modulate = c
+	for spr in _spr_list:
+		spr.modulate = c
+
+func set_support_color(c : Color) -> void:
+	support_color = c
+	if _hanchor_l_node:
+		_hanchor_l_node.modulate = c
+	if _hanchor_r_node:
+		_hanchor_r_node.modulate = c
 
 func set_mode(m : int) -> void:
 	mode = m
@@ -75,6 +91,9 @@ func set_extended(e : bool) -> void:
 
 func _ready() -> void:
 	if not Engine.editor_hint:
+		set_main_color(main_color)
+		set_support_color(support_color)
+		_RemoveSegements()
 		if extended:
 			_Extend()
 		else:
@@ -88,13 +107,13 @@ func _CheckForNodes() -> void:
 	if not _tween_node:
 		_tween_node = get_node_or_null("Tween")
 	if not _refsprite_node:
-		_refsprite_node = get_node_or_null("RefSprite")
+		_refsprite_node = get_node_or_null("Core/RefSprite")
 	if not _hanchor_l_node:
-		_hanchor_l_node = get_node_or_null("HAnchor_L")
+		_hanchor_l_node = get_node_or_null("Core/HAnchor_L")
 	if not _hanchor_r_node:
-		_hanchor_r_node = get_node_or_null("HAnchor_R")
+		_hanchor_r_node = get_node_or_null("Core/HAnchor_R")
 	if not _vanchor_node:
-		_vanchor_node = get_node_or_null("VAnchor")
+		_vanchor_node = get_node_or_null("Core/VAnchor")
 	if not _colshape_node:
 		_colshape_node = get_node_or_null("Area/ColShape")
 
@@ -105,6 +124,10 @@ func _RemoveSegements() -> void:
 			remove_child(spr)
 			spr.queue_free()
 		_spr_list = []
+	for child in get_children():
+		if child is Sprite:
+			remove_child(child)
+			child.queue_free()
 
 func _PositionAnchors() -> void:
 	_CheckForNodes()
@@ -135,8 +158,10 @@ func _PositionAnchors() -> void:
 
 func _Extend() -> void:
 	_CheckForNodes()
+	if _spr_list.size() > 0:
+		return
+
 	if extended and _refsprite_node and _tween_node:
-		print("Extending")
 		_RemoveSegements()
 		_PositionAnchors()
 		match mode:
@@ -154,6 +179,7 @@ func _Extend() -> void:
 func _SpawnSegment(from : Vector2, nogrow : bool = false) -> void:
 	var spr = _refsprite_node.duplicate()
 	spr.region_rect = MID_LADDER_REGION
+	spr.modulate = main_color
 	spr.visible = true
 	_spr_list.append(spr)
 
@@ -171,6 +197,9 @@ func _SpawnSegment(from : Vector2, nogrow : bool = false) -> void:
 	
 	if _colshape_node:
 		var size = (_spr_list.size() * 16.0) * 0.5
+		if mode == MODE.VERTICLE:
+			size += 8
+		
 		var pos = Vector2(0, -size)
 		if mode == MODE.HORIZONTAL:
 			if grow == GROW.LEFT:
@@ -188,17 +217,16 @@ func _SpawnSegment(from : Vector2, nogrow : bool = false) -> void:
 		_colshape_node.shape.extents = pos
 	
 	
-	if nogrow:
-		#if mode == MODE.HORIZONTAL:
-		#	spr.rotate(1.5708)
+	if segment_extend_time <= 0.0 or nogrow:
 		add_child(spr)
-		spr.position = from
+		spr.position = from if nogrow else spr_to
 		_on_tween_all_completed()
 	else:
 		add_child(spr)
 		spr.position = from
 		
 		if _tween_node:
+			_tween_node.remove_all()
 			_tween_node.interpolate_property(spr, "position", spr.position, spr_to, segment_extend_time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			_tween_node.start()
 

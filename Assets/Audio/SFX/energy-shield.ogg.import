@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/energy-shield.ogg-9e1419718d56e3e6eefd3f3037a19982.oggstr"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/energy-shield.ogg"
+dest_files=[ "res://.import/energy-shield.ogg-9e1419718d56e3e6eefd3f3037a19982.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
